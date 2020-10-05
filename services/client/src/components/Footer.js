@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Footer=()=>(
-    <footer>
-    </footer>
+    <div>
+    </div>
   )
 
 export default Footer;

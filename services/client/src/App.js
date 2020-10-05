@@ -6,12 +6,14 @@ import axios from 'axios';
 import Navbar from './components/Navbar.js'
 import MainContent from './components/MainContent.js'
 import Footer from './components/Footer.js'
+import data from './components/Data.js'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: []
+      users: [],
+      tasks: [],
     }
   }
 
@@ -21,13 +23,20 @@ class App extends Component {
       this.setState({ users: response.data })
     })
     .catch(err => console.log(err))
+    this.setState({ tasks: data })
+  }
+
+  updateTask = (task) => {
+    this.setState({tasks: this.state.tasks.map(t => t.id === task.id ? task : t)})
   }
 
   render() {
+    const {tasks, users} = this.state
+
     return (
       <div>
         <Navbar />
-        <MainContent />
+        <MainContent tasks={tasks} updateTask={this.updateTask} />
         <Footer />
       </div>
     )

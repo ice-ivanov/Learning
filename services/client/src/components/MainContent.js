@@ -1,13 +1,21 @@
-import React from 'react';
-import TodoItem from './TodoItem.js'
+import React from 'react'
+import Item from './Objects'
 
-const MainContent = () => (
+const MainContent = ({tasks, updateTask}) => {
+  const onCheck = (status, item) => {
+    updateTask({...item, completed:status})
+  }
+  const dataMap = tasks.map(item =>
+    <Item key={item.id}
+          onCheck={status => onCheck(status, item)}
+          text={item.text}
+          completed={item.completed} />)
+  return (
     <div>
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
+      <h1>Tasks</h1>
+      {dataMap}
     </div>
   )
+}
 
-export default MainContent;
+export default MainContent
